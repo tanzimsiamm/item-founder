@@ -1,3 +1,4 @@
+"use server"
 import envConfig from "@/src/config/envConfig";
 // import { delay } from "@/src/utils/delay";
 

@@ -16,12 +16,13 @@ export default function NavbarDropdown() {
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem onClick={() => handledNvigation('/profile')} key="new">profile</DropdownItem>
-        <DropdownItem onClick={() => handledNvigation('/create-post')} key="copy">create post</DropdownItem>
+        <DropdownItem onClick={() => handledNvigation('/profile/create-post')} key="copy">create post</DropdownItem>
         <DropdownItem onClick={() => handledNvigation('/profile/profile-settings')} key="edit">profile settings</DropdownItem>
         <DropdownItem key="delete" className="text-danger" color="danger">
           Delete file
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
+
   );
 }
