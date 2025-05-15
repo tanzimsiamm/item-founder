@@ -23,3 +23,13 @@ export type Tpost = {
   updatedAt: string;
   __v: number;
 };
+
+export interface IUser {
+  _id: string;
+  name: string;
+  email: string;
+  mobileNumber: string;
+  role: string;
+  status: string;
+  profilePhoto?: string;
+}

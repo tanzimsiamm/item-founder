@@ -5,13 +5,42 @@ import FxInput from "@/src/components/form/FxInput";
 import { Link } from "@heroui/link";
 import LoginValidationSchema from "../../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useUserLogin } from "@/src/hook/auth.hook";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import Loading from "@/src/components/ui/Loading";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useUser } from "@/src/context/user.provider";
 
 const LoginPage = () => {
-  const onSubmit = (data: any) => {
-    console.log(data);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const {setIsLoading: userLoading} = useUser()
+  const redirectUrl = searchParams.get("redirect");
+
+  const {mutate: handleUserLogin, isPending, isSuccess} = useUserLogin();
+
+  console.log(redirectUrl)
+
+  const onSubmit:SubmitHandler<FieldValues> = (data: any) => {
+    handleUserLogin(data);
+    userLoading(true);
   };
 
+  useEffect(() => {
+    if(!isPending && isSuccess){
+      if(redirectUrl){
+        router.push(redirectUrl);
+      }else{
+        router.push("/");
+      }
+  }}, 
+  [isPending, isSuccess])
+
   return (
+    <>
+    {isPending && <Loading />}
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-8">
@@ -43,6 +72,7 @@ const LoginPage = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
