@@ -6,9 +6,13 @@ import { Link } from "@heroui/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RegisterValidationSchema from "../../schemas/register.schema";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { registerUser } from "@/src/services/AuthService";
+import { useUserRegistration } from "@/src/hook/auth.hook";
 
 const RegisterPage = () => {
+  const {mutate: handleUserRegistration, isPending} = useUserRegistration();
+
+
+
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
     const userData = {
       ...data,
@@ -16,9 +20,13 @@ const RegisterPage = () => {
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     };
 
-    registerUser(userData);
-    console.log('user data', userData);
+    console.log("user data", userData);
+    handleUserRegistration(userData);
   };
+
+  if(isPending){
+    // loading.......
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors">
@@ -40,7 +48,7 @@ const RegisterPage = () => {
           <div className="space-y-5">
             <FxInput type="text" name="name" label="Name" />
             <FxInput type="email" name="email" label="Email" />
-            <FxInput type="text" name="mobile" label="Mobile Number" />
+            <FxInput type="text" name="mobileNumber" label="Mobile Number" />
             <FxInput type="password" name="password" label="Password" />
 
             <button
