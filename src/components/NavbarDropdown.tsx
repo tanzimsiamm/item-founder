@@ -12,7 +12,7 @@ import { useUser } from "../context/user.provider";
 
 export default function NavbarDropdown() {
   const router = useRouter();
-  const {setIsLoading: userLoading} = useUser();
+  const {setIsLoading: userLoading, user} = useUser();
   const handledNvigation = (path: string) => {
     router.push(path);
   };
@@ -25,7 +25,7 @@ export default function NavbarDropdown() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Avatar className=" cursor-pointer" name="joe" />
+        <Avatar className=" cursor-pointer" src={user?.profilePhoto} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem onClick={() => handledNvigation("/profile")} key="new">

@@ -3,13 +3,10 @@ import { Tpost } from "@/src/types";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 import Card from "../../ui/Card";
-import { Suspense } from "react";
-import { delay } from "@/src/utils/delay";
 
 
 export default async function RecentPosts() {
 
- await delay();
 
   const {data:posts} = await GetRecentPost(); 
 
