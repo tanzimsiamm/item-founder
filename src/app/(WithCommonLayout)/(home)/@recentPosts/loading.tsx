@@ -1,11 +1,9 @@
-
 import { Button } from "@heroui/button";
 import Link from "next/link";
+
 import CardSkeleton from "@/src/components/ui/CardSkeleton";
 
-
 export default async function RecentPosts() {
-
   return (
     <>
       <div className="section-title my-8">
@@ -15,9 +13,8 @@ export default async function RecentPosts() {
         </p>
       </div>
       <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-3">
-        
         {[...Array(9)].map(() => (
-            <CardSkeleton />
+          <CardSkeleton key={"lala"} />
         ))}
       </div>
       <div className="flex justify-center">

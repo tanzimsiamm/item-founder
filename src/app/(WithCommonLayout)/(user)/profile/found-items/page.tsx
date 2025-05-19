@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const FoundItems = () => {
-  return (
-    <div>FoundItems</div>
-  )
-}
+  return <div>FoundItems</div>;
+};
 
-export default FoundItems
+export default FoundItems;

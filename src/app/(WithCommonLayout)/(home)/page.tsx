@@ -1,11 +1,11 @@
-import Landing from '@/src/components/modules/home/Landing'
+import Landing from "@/src/components/modules/home/Landing";
 
 const page = () => {
   return (
     <>
-    <Landing />
+      <Landing />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,5 +1,6 @@
 import { Input } from "@heroui/input";
-import { SearchIcon } from "../../icons";
+
+import { SearchIcon } from "@/src/assets/icons";
 
 export default function Landing() {
   return (

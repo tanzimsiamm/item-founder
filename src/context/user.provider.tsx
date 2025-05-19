@@ -7,6 +7,7 @@ import {
   useEffect,
   useContext,
 } from "react";
+
 import { IUser } from "../types";
 import { getCurrentUser } from "../services/AuthService";
 
@@ -20,7 +21,7 @@ interface UserContextType {
 
 // 3️⃣ Create the context with default undefined
 export const UserContext = createContext<UserContextType | undefined>(
-  undefined
+  undefined,
 );
 
 // 4️⃣ Define props for children
@@ -35,6 +36,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   const handleUser = async () => {
     const user = await getCurrentUser();
+
     setUser(user);
     setIsLoading(false);
   };
@@ -50,7 +52,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
   );
 };
 
-export const useUser = () =>{
+export const useUser = () => {
   const context = useContext(UserContext);
 
   if (context === undefined) {
@@ -58,6 +60,6 @@ export const useUser = () =>{
   }
 
   return context;
-}
+};
 
 export default UserProvider;

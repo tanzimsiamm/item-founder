@@ -1,8 +1,9 @@
 import { format } from "date-fns";
-import { Tpost } from "@/src/types";
 import { Button } from "@heroui/button";
-import {Card as NextUiCard, CardFooter, CardHeader } from "@heroui/card";
+import { Card as NextUiCard, CardFooter, CardHeader } from "@heroui/card";
 import Image from "next/image";
+
+import { Tpost } from "@/src/types";
 
 const Card = ({ post }: { post: Tpost }) => {
   const { title, category, images, city, dateFound, _id } = post || {};
@@ -11,7 +12,7 @@ const Card = ({ post }: { post: Tpost }) => {
     <NextUiCard isFooterBlurred className="h-[300px] w-full">
       <CardHeader className="absolute top-1 z-10 flex-col items-start">
         <p className="absolute -top-0 right-1 rounded-full bg-black px-2 text-tiny uppercase text-white/90">
-          {/* {category?.name} */} 
+          {/* {category?.name} */}
           waht is here
         </p>
         <h4 className="mt-2 rounded bg-black/30 p-1 text-2xl font-medium text-white">
@@ -21,11 +22,11 @@ const Card = ({ post }: { post: Tpost }) => {
 
       <Image
         // removeWrapper
-        height={300}
-        width={300}
         alt="Card example background"
         className="scale-120 z-0 h-full w-full -translate-y-6 object-cover"
+        height={300}
         src={images[0]}
+        width={300}
       />
       <CardFooter className="absolute bottom-0 z-10 justify-between border-t-1 border-zinc-100/50 bg-white/30">
         <div>

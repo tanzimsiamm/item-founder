@@ -13,7 +13,7 @@ export type Tpost = {
   location: string;
   city: string;
   dateFound: string; // ISO date string
-  status: 'AVAILABLE' | 'CLAIMED' | 'RETURNED'; // extend based on your status enum
+  status: "AVAILABLE" | "CLAIMED" | "RETURNED"; // extend based on your status enum
   isReported: boolean;
   reportCount: number;
   category: string | null;
@@ -32,4 +32,14 @@ export interface IUser {
   role: string;
   status: string;
   profilePhoto?: string;
+}
+
+export interface IInput {
+  variant?: "flat" | "bordered" | "faded" | "underlined";
+  size?: "sm" | "md" | "lg";
+  required?: boolean;
+  type?: string;
+  label: string;
+  name: string;
+  disabled?: boolean;
 }

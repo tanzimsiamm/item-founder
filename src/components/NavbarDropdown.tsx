@@ -6,21 +6,28 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@heroui/dropdown";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 import { logOutUser } from "../services/AuthService";
 import { useUser } from "../context/user.provider";
+import { protectedRoutes } from "../constant";
 
 export default function NavbarDropdown() {
   const router = useRouter();
-  const {setIsLoading: userLoading, user} = useUser();
+  const pathname = usePathname();
+  const { setIsLoading: userLoading, user } = useUser();
   const handledNvigation = (path: string) => {
     router.push(path);
   };
 
-  const handleLogOut =() =>{
+  const handleLogOut = () => {
     logOutUser();
     userLoading(true);
-  }
+
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
+  };
 
   return (
     <Dropdown>
@@ -28,26 +35,26 @@ export default function NavbarDropdown() {
         <Avatar className=" cursor-pointer" src={user?.profilePhoto} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem onClick={() => handledNvigation("/profile")} key="new">
+        <DropdownItem key="new" onClick={() => handledNvigation("/profile")}>
           profile
         </DropdownItem>
         <DropdownItem
-          onClick={() => handledNvigation("/profile/create-post")}
           key="copy"
+          onClick={() => handledNvigation("/profile/create-post")}
         >
           create post
         </DropdownItem>
         <DropdownItem
-          onClick={() => handledNvigation("/profile/profile-settings")}
           key="edit"
+          onClick={() => handledNvigation("/profile/profile-settings")}
         >
           profile settings
         </DropdownItem>
         <DropdownItem
-          onClick={() => handleLogOut()}
           key="delete"
           className="text-danger"
           color="danger"
+          onClick={() => handleLogOut()}
         >
           Log Out
         </DropdownItem>

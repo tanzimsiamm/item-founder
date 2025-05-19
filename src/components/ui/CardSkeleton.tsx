@@ -1,5 +1,5 @@
 import { Card } from "@heroui/card";
-import { Skeleton, } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/skeleton";
 
 export default function CardSkeleton() {
   return (

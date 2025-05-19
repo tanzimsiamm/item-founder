@@ -1,14 +1,13 @@
-import GetRecentPost from "@/src/services/RecentPosts";
-import { Tpost } from "@/src/types";
 import { Button } from "@heroui/button";
 import Link from "next/link";
+
 import Card from "../../ui/Card";
 
+import { Tpost } from "@/src/types";
+import GetRecentPost from "@/src/services/RecentPosts";
 
 export default async function RecentPosts() {
-
-
-  const {data:posts} = await GetRecentPost(); 
+  const { data: posts } = await GetRecentPost();
 
   return (
     <>
@@ -19,7 +18,6 @@ export default async function RecentPosts() {
         </p>
       </div>
       <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-3">
-        
         {posts.map((post: Tpost) => (
           <Card key={post?._id} post={post} />
         ))}

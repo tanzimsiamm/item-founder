@@ -1,17 +1,17 @@
 "use client";
 
-import FxForm from "@/src/components/form/FxForm";
-import FxInput from "@/src/components/form/FxInput";
 import { Link } from "@heroui/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import RegisterValidationSchema from "../../schemas/register.schema";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+
+import RegisterValidationSchema from "../../schemas/register.schema";
+
+import FxInput from "@/src/components/form/FxInput";
+import FxForm from "@/src/components/form/FxForm";
 import { useUserRegistration } from "@/src/hook/auth.hook";
 
 const RegisterPage = () => {
-  const {mutate: handleUserRegistration, isPending} = useUserRegistration();
-
-
+  const { mutate: handleUserRegistration, isPending } = useUserRegistration();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
     const userData = {
@@ -20,11 +20,10 @@ const RegisterPage = () => {
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     };
 
-    console.log("user data", userData);
     handleUserRegistration(userData);
   };
 
-  if(isPending){
+  if (isPending) {
     // loading.......
   }
 
@@ -36,24 +35,24 @@ const RegisterPage = () => {
         </h2>
 
         <FxForm
-          onSubmit={onSubmit}
-          resolver={zodResolver(RegisterValidationSchema)}
           defaultValues={{
             name: "siam ahmed",
             email: "siam@gmail.com",
             mobileNumber: "0123456789",
             password: "123456",
           }}
+          resolver={zodResolver(RegisterValidationSchema)}
+          onSubmit={onSubmit}
         >
           <div className="space-y-5">
-            <FxInput type="text" name="name" label="Name" />
-            <FxInput type="email" name="email" label="Email" />
-            <FxInput type="text" name="mobileNumber" label="Mobile Number" />
-            <FxInput type="password" name="password" label="Password" />
+            <FxInput label="Name" name="name" type="text" />
+            <FxInput label="Email" name="email" type="email" />
+            <FxInput label="Mobile Number" name="mobileNumber" type="text" />
+            <FxInput label="Password" name="password" type="password" />
 
             <button
-              type="submit"
               className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
+              type="submit"
             >
               Register
             </button>
@@ -63,8 +62,8 @@ const RegisterPage = () => {
         <p className="mt-6 text-sm text-center text-gray-600 dark:text-gray-300">
           Already have an account?{" "}
           <Link
-            href="/login"
             className="text-blue-600 hover:underline dark:text-blue-400"
+            href="/login"
           >
             Login
           </Link>

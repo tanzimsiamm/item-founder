@@ -12,14 +12,15 @@ import { Link } from "@heroui/link";
 import NextLink from "next/link";
 import clsx from "clsx";
 
-import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/theme-switch";
-import NavbarDropdown from "./NavbarDropdown";
 import { useUser } from "../context/user.provider";
 
-export const Navbar = () => {
+import NavbarDropdown from "./NavbarDropdown";
 
-  const {user} = useUser();
+import { siteConfig } from "@/src/config/site";
+import { ThemeSwitch } from "@/src/components/theme-switch";
+
+export const Navbar = () => {
+  const { user } = useUser();
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
@@ -36,7 +37,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   "text-foreground hover:text-primary transition",
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "data-[active=true]:text-primary data-[active=true]:font-medium",
                 )}
                 href={item.href}
               >
@@ -52,10 +53,15 @@ export const Navbar = () => {
         justify="end"
       >
         {/* Removed social icons and search */}
-        <NavbarItem className="hidden md:flex">
-        </NavbarItem>
+        <NavbarItem className="hidden md:flex" />
         <ThemeSwitch />
-        {user?.email ? <NavbarDropdown /> : <Link href="/login" color="primary" size="lg">Login</Link>}
+        {user?.email ? (
+          <NavbarDropdown />
+        ) : (
+          <Link color="primary" href="/login" size="lg">
+            Login
+          </Link>
+        )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -74,8 +80,8 @@ export const Navbar = () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                      ? "danger"
+                      : "foreground"
                 }
                 href="#"
                 size="lg"
